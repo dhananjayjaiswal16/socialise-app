@@ -1,6 +1,7 @@
 import './globals.css'
 import Nav from "./auth/Nav";
 import { Roboto } from 'next/font/google'
+import QueryWrapper from './helper/QueryWrapper';
 
 export const metadata = {
   title: 'Socailise',
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} mx-4 md:mx-48 xl:mx-96`}>
-        <Nav />
-        {children}
+        <QueryWrapper>
+          <Nav />
+          {children}
+        </QueryWrapper>
       </body>
     </html>
   )
