@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../auth/[...nextauth]"
-
+import prisma from "../../../prisma/client";
 export default async function handler(
   req: NextApiRequest,res: NextApiResponse
 ) {
@@ -12,6 +12,30 @@ export default async function handler(
         message: "Please login to create a post!"
       })
     }
-    console.log("session works req.body --> ", req.body);
+    const title: string = req.body.title; 
+    if(title.length > 300){
+      return res.status(403).json({
+        message: "Please write a post of less than 300 words!"
+      }) 
+    }
+
+    const prismaUser = await prisma.user.findUnique({
+      where: {email: session?.user?.email}
+    })
+
+    try {
+      const result = await prisma.post.create({
+        data: {
+          title,
+          userId: prismaUser?.id,
+        }
+      })
+      return res.status(200).json(result)
+    } catch (error) {
+      return res.status(403).json({
+        err: "Error occured while creating the post",
+        errMsg: error.message
+      })
+    }
   }
 }
