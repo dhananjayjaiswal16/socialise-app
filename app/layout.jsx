@@ -1,6 +1,7 @@
 import './globals.css'
 import Nav from "./auth/Nav";
 import { Roboto } from 'next/font/google'
+import Toast from './components/Toast';
 
 export const metadata = {
   title: 'Socailise',
@@ -21,6 +22,7 @@ export default function RootLayout({
       <head></head>
       <body className={`${roboto.variable} mx-4 md:mx-48 xl:mx-96`}>
         <Nav />
+        <Toast />
         {children}
       </body>
     </html>

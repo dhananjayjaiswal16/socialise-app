@@ -2,10 +2,12 @@
 
 import React, { useState, FormEvent, ChangeEventHandler, ChangeEvent } from "react"
 import axios from "axios";
+import toast from "react-hot-toast";
+
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [disabled, setDisabled] = useState(true);
-
+  let toastId: string;
   const handleTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
     e.target.value.length===0 || e.target.value.length > 300 ? setDisabled(true) : setDisabled(false) 
@@ -13,15 +15,17 @@ const AddPost = () => {
 
   const submitPost = async (e: FormEvent) => {
     e.preventDefault();
+    toastId = toast.loading("Creating your post", {id: toastId})
     setDisabled(true);
     try {
       const res = await axios.post("/api/posts/createPost", { title })
       console.log("res ==> ", res.data);
+      toast.success('Post has been created successfully', {id: toastId});
       setTitle('');
       setDisabled(false)
     } catch (error) {
       console.log("Error in UI while fetchinf data ", error);
-      
+      toast.error("Failed to create post!", {id: toastId});
     }
   }
   return (
