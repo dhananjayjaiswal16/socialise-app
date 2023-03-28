@@ -1,9 +1,14 @@
+import axios from "axios"
 import AddPost from "./components/AddPost"
 
-const Home = () => {
+const allPosts = async () => {
+  const res = await axios.get("/api/posts/getPost")
+  return res.data;
+}
+
+const Home = async () => {
   return (
     <main>
-      <h1>Hello world!</h1>      
       <AddPost />
     </main>
   )

@@ -19,7 +19,6 @@ const AddPost = () => {
     setDisabled(true);
     try {
       const res = await axios.post("/api/posts/createPost", { title })
-      console.log("res ==> ", res.data);
       toast.success('Post has been created successfully', {id: toastId});
       setTitle('');
       setDisabled(false)
@@ -41,14 +40,14 @@ const AddPost = () => {
       </div>
       <div className="flex items-center justify-between gap-2">
         <span className={`font-bold text-sm ${
-          title.length > 300 ?"text-red-600":"text-gray-200"
+          title.length > 300 && "text-red-600"
         }`}>{title.length}/300</span>
         <button
           className="text-sm bg-blue-500 text-white py-2 px-4 rounded-xl disabled:opacity-25"
           disabled={disabled}
           type="submit"
         >
-          Create Now
+          Post
         </button>
       </div>
     </form>
