@@ -3,10 +3,11 @@
 import { theme } from "@nextui-org/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { PostType } from "../types/Posts"
 
-const Post = ({avatar, name, postTitle, id}) => {
-
+const Post = ({avatar, name, postTitle, id, comment}) => {
+  console.log("Comments ", comment);
+  
   return (
     <div style={{ backgroundColor: `${theme.colors.gray100}` }} className="my-8 p-8 rounded-lg">
       <div className="flex items-center gap-2">
@@ -24,7 +25,9 @@ const Post = ({avatar, name, postTitle, id}) => {
       </div>
       <div className="flex- gap-4 items-center cursor-pointer">
         <Link href={`/post/${id}`}>
-            <span className="text-sm font-bold">Comments</span>
+            <span className="text-sm font-bold">
+              {comment?.length} Comments
+            </span>
         </Link>
       </div>
     </div>
