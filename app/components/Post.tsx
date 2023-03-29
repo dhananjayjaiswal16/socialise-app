@@ -3,9 +3,9 @@
 import { theme } from "@nextui-org/react"
 import Image from "next/image"
 import Link from "next/link"
-import { PostType } from "../types/Posts"
+import { SinglePost } from "../types/Posts"
 
-const Post = ({avatar, name, postTitle, id, comment}) => {
+const Post = ({avatar, name, title, id, comment}: SinglePost) => {
   console.log("Comments ", comment);
   
   return (
@@ -21,7 +21,7 @@ const Post = ({avatar, name, postTitle, id, comment}) => {
         <h3 className="font-bold">{name}</h3>
       </div>
       <div className="my-8">
-        <span className="break-all">{postTitle}</span>
+        <span className="break-all">{title}</span>
       </div>
       <div className="flex- gap-4 items-center cursor-pointer">
         <Link href={`/post/${id}`}>

@@ -16,7 +16,7 @@ const Posts = ({ data }: Data) => {
         <Post 
           key={post.id} 
           avatar={post.user.image} 
-          postTitle={post.title} 
+          title={post.title} 
           name={post.user.name} 
           id={post.id}
           comment={post.comment}

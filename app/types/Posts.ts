@@ -14,3 +14,15 @@ export type PostType = {
     userId: string
   }[]
 }
+
+export type SinglePost = {
+  id: string,
+  name: string,
+  avatar: string,
+  title: string,
+  comment?: {
+    id: string,
+    postId: string,
+    userId: string
+  }[]
+}
