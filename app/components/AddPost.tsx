@@ -3,8 +3,11 @@
 import React, { useState, FormEvent, ChangeEventHandler, ChangeEvent } from "react"
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AddPost = () => {
+  const router = useRouter();
+  
   const [title, setTitle] = useState("");
   const [disabled, setDisabled] = useState(true);
   let toastId: string;
@@ -18,10 +21,22 @@ const AddPost = () => {
     toastId = toast.loading("Creating your post", {id: toastId})
     setDisabled(true);
     try {
-      const res = await axios.post("/api/posts/createPost", { title })
-      toast.success('Post has been created successfully', {id: toastId});
-      setTitle('');
-      setDisabled(false)
+      const res = await fetch("/api/posts/createPost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title
+        }),
+        cache: 'no-store'
+      });
+      if(res.ok){
+        toast.success('Post has been created successfully', {id: toastId});
+        setTitle('');
+        setDisabled(false)
+        router.refresh();
+      }
     } catch (error) {
       console.log("Error in UI while fetchinf data ", error);
       toast.error("Failed to create post!", {id: toastId});

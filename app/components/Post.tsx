@@ -6,7 +6,6 @@ import Link from "next/link"
 import { SinglePost } from "../types/Posts"
 
 const Post = ({avatar, name, title, id, comment}: SinglePost) => {
-  console.log("Comments ", comment);
   
   return (
     <div style={{ backgroundColor: `${theme.colors.gray100}` }} className="my-8 p-8 rounded-lg">

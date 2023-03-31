@@ -1,23 +1,19 @@
-"use client"
-import axios from "axios"
-import { useEffect, useState } from "react"
 import AddPost from "./components/AddPost"
 import Posts from "./components/Posts"
+import Spinner from "./components/Spinner";
 import { PostType } from "./types/Posts"
-const Home = () => {
-  const [data, setData] = useState<PostType[]>();
+
+async function getPosts() {
+  const res = await fetch(`http://localhost:3000/api/posts/getPost`, {
+    cache: "no-store",
+  });
+  // console.log(res);
+  return res.json();
+}
+
+const Home = async () => {
+  const data: PostType[] = await getPosts();
   
-  useEffect(() => {
-    const allPosts = async () => {
-      try {
-        const res = await axios.get("/api/posts/getPost")
-        setData(res.data)
-      } catch (error) {
-        console.log(error.message); 
-      }
-    }
-    allPosts();
-  },[])
   return (
     <main>
       <AddPost />
