@@ -1,13 +1,11 @@
 import AddPost from "./components/AddPost"
 import Posts from "./components/Posts"
-import Spinner from "./components/Spinner";
 import { PostType } from "./types/Posts"
 
 async function getPosts() {
-  const res = await fetch(`http://localhost:3000/api/posts/getPost`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/posts/getPost`, {
     cache: "no-store",
   });
-  // console.log(res);
   return res.json();
 }
 

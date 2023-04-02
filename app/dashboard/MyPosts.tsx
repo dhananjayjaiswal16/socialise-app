@@ -1,23 +1,11 @@
 'use client'
-
-import axios from "axios";
-import { useEffect, useState } from "react"
 import { AuthPosts } from "../types/MyPosts";
 import EditPost from "./EditPost";
 
-const MyPosts = () => {
-  const [data, setData] = useState<AuthPosts>();
-  useEffect(() => {
-    const allPosts = async () => {
-      try {
-        const res = await axios.get("/api/posts/myPosts")
-        setData(res.data)
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    allPosts();
-  },[])
+type Data = {
+  data: AuthPosts | undefined
+}
+const MyPosts = ({data} : Data) => {
   
   return (
     <div>

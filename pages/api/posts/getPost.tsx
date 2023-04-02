@@ -1,11 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { getServerSession } from "next-auth/next";
 
 import prisma from "../../../prisma/client";
+import { authOptions } from "../auth/[...nextauth]";
 export default async function handler(
   req: NextApiRequest,res: NextApiResponse
 ) {
-  if(req.method === "GET"){
     try {
+      const session = await getServerSession(req, res, authOptions)
       const posts = await prisma.post.findMany({
         include: {
           user: true,
@@ -22,5 +24,4 @@ export default async function handler(
         errMsg: error.message
       })
     }
-  }
 }

@@ -21,7 +21,7 @@ const AddPost = () => {
     toastId = toast.loading("Creating your post", {id: toastId})
     setDisabled(true);
     try {
-      const res = await fetch("/api/posts/createPost", {
+      const res = await fetch(`/api/posts/createPost`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
