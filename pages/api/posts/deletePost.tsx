@@ -34,6 +34,7 @@ export default async function handler(
 
       return res.status(200).json(result)
     } catch (error) {
+      if(error instanceof Error)
       return res.status(403).json({
         err: `Error occured while deleting post id: ${postId}`,
         errMsg: error.message
