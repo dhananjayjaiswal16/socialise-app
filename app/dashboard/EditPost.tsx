@@ -24,7 +24,6 @@ const EditPost = ({ avatar, name, title, comment, id } : SinglePost) => {
         },
         body: JSON.stringify({ postId }),
       });
-      console.log("res.data ---> ", res);
       
       if (res.ok) {
         closeHandler();

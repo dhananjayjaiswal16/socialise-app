@@ -20,7 +20,7 @@ async function getMyPosts() {
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
-  
+
   if(!session){
     redirect("/api/auth/signin")
   }

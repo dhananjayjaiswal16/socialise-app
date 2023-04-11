@@ -4,7 +4,8 @@ import React, { useState, FormEvent, ChangeEventHandler, ChangeEvent } from "rea
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
+import Filter from "bad-words";
+const filter = new Filter();
 const AddPost = () => {
   const router = useRouter();
   
@@ -18,6 +19,10 @@ const AddPost = () => {
 
   const submitPost = async (e: FormEvent) => {
     e.preventDefault();
+    if (filter.isProfane(title)){
+      toast.error("Use of profanity is not allowed on this platform")
+      return;
+    }
     toastId = toast.loading("Creating your post", {id: toastId})
     setDisabled(true);
     try {
@@ -31,6 +36,10 @@ const AddPost = () => {
         }),
         cache: 'no-store'
       });
+      if(!res.ok){
+        const { message } = await res.json()
+        toast.error(message, {id: toastId});
+      }
       if(res.ok){
         toast.success('Post has been created successfully', {id: toastId});
         setTitle('');
@@ -38,8 +47,8 @@ const AddPost = () => {
         router.refresh();
       }
     } catch (error) {
-      console.log("Error in UI while fetchinf data ", error);
-      toast.error("Failed to create post!", {id: toastId});
+      toast.error("Internal Server Error", { id: toastId })
+      setDisabled(false)
     }
   }
   return (

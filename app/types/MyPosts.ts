@@ -1,3 +1,5 @@
+import { LikeType } from "./Like"
+
 export type AuthPosts = {
   email: string
   id: string
@@ -13,6 +15,7 @@ export type AuthPosts = {
       postId: string
       message: string
       userId: string
-    }[]
+    }[],
+    likes?: LikeType[]
   }[]
 }

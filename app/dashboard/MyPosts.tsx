@@ -1,11 +1,17 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { AuthPosts } from "../types/MyPosts";
 import EditPost from "./EditPost";
+import { useEffect } from "react";
 
 type Data = {
   data: AuthPosts | undefined
 }
 const MyPosts = ({data} : Data) => {
+  const router = useRouter()
+  useEffect(() => {
+    router.refresh()
+  },[])
   
   return (
     <div>

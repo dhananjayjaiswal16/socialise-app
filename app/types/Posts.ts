@@ -1,3 +1,6 @@
+import { CommentType } from "./Comment"
+import { LikeType } from "./Like"
+
 export type PostType = {
   id: string
   title: string
@@ -6,13 +9,8 @@ export type PostType = {
     image: string
     name: string
   }
-  comment?: {
-    createdAt?: string
-    id: string
-    postId: string
-    message: string
-    userId: string
-  }[]
+  comment?: CommentType[]
+  likes?: LikeType[]
 }
 
 export type SinglePost = {
@@ -24,5 +22,6 @@ export type SinglePost = {
     id: string,
     postId: string,
     userId: string
-  }[]
+  }[],
+  likes?: LikeType[]
 }

@@ -5,17 +5,25 @@ export default async function handler(
   req: NextApiRequest,res: NextApiResponse
 ) {
     try {
-      const posts = await prisma.post.findMany({
+      console.log("req.query", req.query);
+      const result = await prisma.post.findUnique({
+        where: {
+          id: req.query.details
+        },
         include: {
           user: true,
           likes: true,
-          comment: true,
-        },
-        orderBy: {
-          createdAt: "desc"
+          comment: {
+            orderBy: {
+              createdAt: "desc"
+            },
+            include: {
+              user: true
+            }
+          }
         }
       })
-      return res.status(200).json(posts)
+      return res.status(200).json(result);
     } catch (error) {
       if(error instanceof Error)
       return res.status(403).json({
