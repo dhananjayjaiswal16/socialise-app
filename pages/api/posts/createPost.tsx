@@ -22,16 +22,17 @@ export default async function handler(
     const prismaUser = await prisma.user.findUnique({
       where: {email: session?.user?.email}
     })
-
+    const dataObj: any = {
+      title,
+      userId: prismaUser?.id,
+    }
     try {
       const result = await prisma.post.create({
-        data: {
-          title,
-          userId: prismaUser?.id,
-        }
+        data: dataObj
       })
       return res.status(200).json(result)
     } catch (error) {
+      if(error instanceof Error)
       return res.status(403).json({
         err: "Error occured while creating the post",
         errMsg: error.message

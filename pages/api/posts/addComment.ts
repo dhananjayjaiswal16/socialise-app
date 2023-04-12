@@ -28,14 +28,14 @@ export default async function handler(
     const prismaUser = await prisma.user.findUnique({
       where: {email: session?.user?.email}
     })
-
+    const dataObj: any = {
+      message: title,
+      postId: postId,
+      userId: prismaUser?.id
+    }
     try {
       const result = await prisma.comment.create({
-        data: {
-          message: title,
-          postId: postId,
-          userId: prismaUser?.id
-        }
+        data: dataObj
       })
       return res.status(200).json(result)
     } catch (error) {
