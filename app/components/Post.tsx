@@ -39,7 +39,6 @@ const Post = ({avatar, name, title, id, comment, likes, userId}: SinglePost) => 
   const [fill, setFill] = useState(false);
   const currentUserLiked = (likes?.some((like) => like.userId === userId)) || false;
   let toastId: string;
-  console.log("Likes ", likes)
   const addLike = async (id: string) => {
     setLoading(true)
     try {

@@ -36,6 +36,10 @@ const AddComment = ({id}: {id: string}) => {
         }),
         cache: 'no-store'
       });
+      if(!res.ok){
+        const { message } = await res.json()
+        toast.error(message, {id: toastId});
+      }
       if(res.ok){
         toast.success('Comment has been created successfully', {id: toastId});
         setComment('');

@@ -15,7 +15,7 @@ export type PostType = {
 
 export type SinglePost = {
   id: string,
-  userId: string,
+  userId?: string,
   name: string,
   avatar: string,
   title: string,

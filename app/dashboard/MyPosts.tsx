@@ -15,7 +15,11 @@ const MyPosts = ({data} : Data) => {
   
   return (
     <div>
-      {data?.post?.map((post) => 
+      {data?.post?.length === 0
+      ? <div className="flex items-center justify-center my-7">
+          <h3 className="text-3xl font-bold">404 | You haven't created a post yet!</h3>
+        </div>
+      : data?.post?.map((post) => 
         <EditPost 
           key={post.id}
           id={post.id}

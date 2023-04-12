@@ -15,13 +15,13 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions)
     if(!session){
       return res.status(401).json({
-        message: "Please login to create a post!"
+        message: "Please login to comment!"
       })
     }
     const {title, postId}: ReqBody = req.body; 
     if(title.length > 300){
       return res.status(403).json({
-        message: "Please write a post of less than 300 words!"
+        message: "Please write a comment of less than 300 words!"
       }) 
     }
 
