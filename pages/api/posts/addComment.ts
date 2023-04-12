@@ -19,7 +19,6 @@ export default async function handler(
       })
     }
     const {title, postId}: ReqBody = req.body; 
-    console.log("REq,pbdy ===> ", req.body)
     if(title.length > 300){
       return res.status(403).json({
         message: "Please write a post of less than 300 words!"
