@@ -33,10 +33,11 @@ const HeartIcon = ({ fill, onClick }: { fill: boolean; onClick: Function }) => {
   );
 };
 
-const Post = ({avatar, name, title, id, comment, likes}: SinglePost) => {
+const Post = ({avatar, name, title, id, comment, likes, userId}: SinglePost) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [fill, setFill] = useState(false);
+  const currentUserLiked = (likes?.some((like) => like.userId === userId)) || false;
   let toastId: string;
   console.log("Likes ", likes)
   const addLike = async (id: string) => {
@@ -93,7 +94,7 @@ const Post = ({avatar, name, title, id, comment, likes}: SinglePost) => {
             <Loading size="sm" color="error" />
           ) : (
             <HeartIcon
-              fill={fill}
+              fill={currentUserLiked}
               onClick={() => addLike(id)}
             />
           )}

@@ -7,10 +7,11 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 
 type Data = {
-  data: PostType[] | undefined
+  data: PostType[] | undefined,
+  userId: string
 }
 
-const Posts = ({data} : Data) => {
+const Posts = ({data, userId} : Data) => {
   const router = useRouter()
   useEffect(() => {
     router.refresh()
@@ -33,6 +34,7 @@ const Posts = ({data} : Data) => {
           id={post.id}
           likes={post.likes}
           comment={post.comment}
+          userId={userId}
         />
       ))}
     </>
