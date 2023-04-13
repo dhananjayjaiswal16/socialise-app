@@ -16,7 +16,7 @@ const Posts = ({data, userId} : Data) => {
   useEffect(() => {
     router.refresh()
   },[])
-  
+  console.log("Data in Postssss==>> ", data);
   if(!data){
     return <Spinner />
   }
