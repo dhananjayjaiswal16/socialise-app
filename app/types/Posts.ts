@@ -4,6 +4,7 @@ import { LikeType } from "./Like"
 export type PostType = {
   id: string
   title: string
+  createdAt?: string
   updatedAt?: string
   user: {
     image: string
@@ -19,6 +20,7 @@ export type SinglePost = {
   name: string,
   avatar: string,
   title: string,
+  createdAt?: string,
   comment?: {
     id: string,
     postId: string,

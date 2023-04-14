@@ -33,6 +33,7 @@ const Posts = ({data, userId} : Data) => {
           likes={post.likes}
           comment={post.comment}
           userId={userId}
+          createdAt={post.createdAt}
         />
       ))}
     </>

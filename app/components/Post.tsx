@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { useState } from "react"
 import { Loading } from "@nextui-org/react"
+import { formatDate } from "@/utils"
 const HeartIcon = ({ fill, onClick }: { fill: boolean; onClick: Function }) => {
   const [hover, setHover] = useState(false);
   return (
@@ -33,7 +34,7 @@ const HeartIcon = ({ fill, onClick }: { fill: boolean; onClick: Function }) => {
   );
 };
 
-const Post = ({avatar, name, title, id, comment, likes, userId}: SinglePost) => {
+const Post = ({avatar, name, title, id, comment, likes, userId, createdAt}: SinglePost) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [fill, setFill] = useState(false);
@@ -71,12 +72,15 @@ const Post = ({avatar, name, title, id, comment, likes, userId}: SinglePost) => 
       <div className="flex items-center gap-2">
         <Image 
           className="rounded-full"
-          width={32}
-          height={32}
+          width={54}
+          height={54}
           src={avatar}
           alt="avatar"
         />
-        <h3 className="font-bold">{name}</h3>
+        <div className="flex flex-col gap-2">
+          <h3 className="font-bold">{name}</h3>
+          {createdAt && <h2 className="text-sm my-0">{formatDate(createdAt)}</h2>}
+        </div>
       </div>
       <div className="my-8">
         <span className="break-all">{title}</span>

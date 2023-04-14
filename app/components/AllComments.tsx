@@ -12,8 +12,8 @@ const AllComments = ({data}: {data: PostType}) => {
           <div className="flex items-center gap-2">
             <Image 
               className="rounded-full"
-              width={64}
-              height={64}
+              width={54}
+              height={54}
               src={singleComment?.user?.image}
               alt="avatar"
             />
